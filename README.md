@@ -17,6 +17,13 @@ You can install the development version of lineaR like so:
 devtools::install_github("Presage-Group/lineaR")
 ```
 
+## Getting an API Key From Linear
+
+You will need a personal Linear API key in order to use this package.
+This can be generated at the [security settings
+page](https://linear.app/presagegroup/settings/account/security) within
+linear.
+
 ## Example
 
 This is a basic example which shows you how to solve a common problem:
