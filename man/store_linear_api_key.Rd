@@ -6,6 +6,9 @@
 \usage{
 store_linear_api_key(api_key)
 }
+\arguments{
+\item{api_key}{Your personal linear API key. See README.md for information.}
+}
 \value{
 nothing
 }

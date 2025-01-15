@@ -1,5 +1,7 @@
 #' Stores your API key in your keyring. 
 #'
+#' @param api_key Your personal linear API key. See README.md for information.  
+#' 
 #' @return nothing
 #' @export
 store_linear_api_key <- function(api_key){
