@@ -30,13 +30,18 @@ devtools::install_github("Presage-Group/lineaR")
 
 ## Getting an API Key From Linear
 
-You will need a personal Linear API key in order to use this package. This can be generated at the [security settings page](https://linear.app/presagegroup/settings/account/security) within linear. 
+You will need a personal Linear API key in order to use this package. This can be generated at the [security settings page](https://linear.app/presagegroup/settings/account/security) within linear. Store this key in your `keyring` with the provided utility function `store_linear_api_key` and it will be retrieved when needed. 
 
 ## Example
 
-This is a basic example which shows you how to solve a common problem:
-
-```{r example}
+```r
 library(lineaR)
-## basic example code
+
+me()
+
+# A tibble: 1 × 3
+# id                                   name        email                  
+# <chr>                                <chr>       <chr>                  
+# 1 ---------------------------------  Randy Boyes rboyes@presagegroup.com
+
 ```
