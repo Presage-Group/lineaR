@@ -12,6 +12,7 @@ RoxygenNote: 7.3.2
 Imports: 
     dplyr,
     ghql,
+    httr2,
     jsonlite,
     keyring,
     methods

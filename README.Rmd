@@ -37,7 +37,7 @@ You will need a personal Linear API key in order to use this package. This can b
 ```r
 library(lineaR)
 
-me()
+get_linear_current_user()
 
 # A tibble: 1 × 3
 # id                                   name        email                  

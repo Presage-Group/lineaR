@@ -30,7 +30,7 @@ function `store_linear_api_key` and it will be retrieved when needed.
 ``` r
 library(lineaR)
 
-me()
+get_linear_current_user()
 
 # A tibble: 1 × 3
 # id                                   name        email                  
