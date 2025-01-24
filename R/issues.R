@@ -7,8 +7,8 @@
 #' @importFrom methods new
 #' @export
 get_linear_issues <- function(team_id, api_url = "https://api.linear.app/graphql"){
-  graphql_query <- paste0('{
-  team(id: "',  team_id, '") {
+  graphql_query <- glue::glue('{
+  team(id: "{team_id}") {
     id
     name
 
@@ -28,18 +28,7 @@ get_linear_issues <- function(team_id, api_url = "https://api.linear.app/graphql
   }
   }')
 
-  body <- list(query = graphql_query)
-
-  response <- httr2::request(api_url) |> 
-    httr2::req_headers(
-      "Authorization" = get_linear_api_key(),
-      "Content-Type" = "application/json"
-    ) |> 
-    httr2::req_body_json(body) |> 
-    httr2::req_perform()
-
-  response_body <- httr2::resp_body_json(response)
-  return(dplyr::as_tibble(response_body))
+  return(make_linear_api_request(graphql_query, api_url))
 }
 
 #' Creates a new issue within a team specified using the team's id. 
@@ -52,16 +41,16 @@ get_linear_issues <- function(team_id, api_url = "https://api.linear.app/graphql
 #' @return tibble
 #' @export
 create_linear_issue <- function(
-  title, 
-  description, 
+  title="New issue via lineaR", 
+  description=" ", 
   team_id, 
   api_url = "https://api.linear.app/graphql"){
   
-  graphql_query <- paste0('mutation {
+  graphql_query <- glue::glue('mutation {
     issueCreate(input: {
-      title: "', title, '",
-      description: "', description, '",
-      teamId: "', team_id, '"
+      title: "{title}",
+      description: "{description}",
+      teamId: "{team_id}"
     }) {
       issue {
         id
@@ -70,16 +59,5 @@ create_linear_issue <- function(
     }
   }')
 
-  body <- list(query = graphql_query)
-
-  response <- httr2::request() |> 
-    httr2::req_headers(
-      "Authorization" = get_linear_api_key(),
-      "Content-Type" = "application/json"
-    ) |> 
-    httr2::req_body_json(body) |> 
-    httr2::req_perform()
-
-  response_body <- httr2::resp_body_json(response)
-  return(dplyr::as_tibble(response_body))
+  return(make_linear_api_request(graphql_query, api_url = api_url))
 }

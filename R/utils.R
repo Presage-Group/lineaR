@@ -12,15 +12,15 @@ get_linear_api_key <- function(){
   keyring::key_get("linear_api")
 }
 
-make_linear_api_request <- function(request_string){
-  httr2::request("https://api.linear.app/graphql") |>
-    httr2::req_method("POST") |> 
+make_linear_api_request <- function(request_string, api_url = "https://api.linear.app/graphql"){
+  response <- httr2::request(api_url) |> 
     httr2::req_headers(
-      Authorization = get_linear_api_key(),
-      `Content-Type` = "application/json",
+      "Authorization" = get_linear_api_key(),
+      "Content-Type" = "application/json"
     ) |> 
-    httr2::req_body_raw(request_string) |> 
-    httr2::req_perform() |> 
-    httr2::resp_body_string() |> 
-    jsonlite::fromJSON(flatten = TRUE) 
+    httr2::req_body_json(list(query = request_string)) |> 
+    httr2::req_perform()
+
+  response_body <- httr2::resp_body_json(response)
+  return(dplyr::as_tibble(response_body))
 }
