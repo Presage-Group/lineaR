@@ -21,6 +21,5 @@ make_linear_api_request <- function(request_string, api_url = "https://api.linea
     httr2::req_body_json(list(query = request_string)) |> 
     httr2::req_perform()
 
-  response_body <- httr2::resp_body_json(response)
-  return(dplyr::as_tibble(response_body))
+  return(response)
 }

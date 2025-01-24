@@ -5,10 +5,11 @@
 #' @return tibble
 #' @export
 get_linear_teams <- function(api_url = "https://api.linear.app/graphql"){
-  return(
-    make_linear_api_request(
-      '{ "query" : "{ teams { nodes { id name } } }" }',
+  resp <- make_linear_api_request(
+      "{ teams { nodes { id name } } }",
       api_url
-    )
-  )
+    ) |> 
+    httr2::resp_body_json()
+    
+  return(dplyr::as_tibble(resp$data$teams) |> unnest_wider(nodes))
 }
