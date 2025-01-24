@@ -13,7 +13,6 @@ Imports:
     dplyr,
     glue,
     httr2,
-    jsonlite,
     keyring,
-    methods,
     testthat
+Config/testthat/edition: 3

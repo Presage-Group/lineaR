@@ -4,10 +4,12 @@
 \alias{get_linear_issues}
 \title{Returns a tibble with the issues for a given team_id}
 \usage{
-get_linear_issues(team_id)
+get_linear_issues(team_id, api_url = "https://api.linear.app/graphql")
 }
 \arguments{
 \item{team_id}{The id for the team. Use get_linear_teams() to find the id of the team you want.}
+
+\item{api_url}{Defaults to the current linear api url, but can be changed}
 }
 \value{
 tibble

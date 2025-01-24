@@ -4,7 +4,6 @@
 #' @param api_url Defaults to the current linear api url, but can be changed 
 #' 
 #' @return tibble
-#' @importFrom methods new
 #' @export
 get_linear_issues <- function(team_id, api_url = "https://api.linear.app/graphql"){
   graphql_query <- glue::glue('{

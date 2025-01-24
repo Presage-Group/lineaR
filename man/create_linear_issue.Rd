@@ -4,7 +4,12 @@
 \alias{create_linear_issue}
 \title{Creates a new issue within a team specified using the team's id.}
 \usage{
-create_linear_issue(title, description, team_id)
+create_linear_issue(
+  title = "New issue via lineaR",
+  description = " ",
+  team_id,
+  api_url = "https://api.linear.app/graphql"
+)
 }
 \arguments{
 \item{title}{The issue title}
@@ -12,6 +17,8 @@ create_linear_issue(title, description, team_id)
 \item{description}{The issue description}
 
 \item{team_id}{The id for the team. Use get_linear_teams() to find the id of the team you want.}
+
+\item{api_url}{Defaults to the current linear api url, but can be changed}
 }
 \value{
 tibble

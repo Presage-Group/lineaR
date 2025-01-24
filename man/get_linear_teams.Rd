@@ -4,7 +4,10 @@
 \alias{get_linear_teams}
 \title{Returns a tibble with the id and name of Teams in the organization}
 \usage{
-get_linear_teams()
+get_linear_teams(api_url = "https://api.linear.app/graphql")
+}
+\arguments{
+\item{api_url}{Defaults to the current linear api url, but can be changed}
 }
 \value{
 tibble

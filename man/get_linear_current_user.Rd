@@ -4,7 +4,10 @@
 \alias{get_linear_current_user}
 \title{Returns a tibble with your id, name, and email. Useful for checking if you have successfully authenticated with the linear API.}
 \usage{
-get_linear_current_user()
+get_linear_current_user(api_url)
+}
+\arguments{
+\item{api_url}{Defaults to the current linear api url, but can be changed.}
 }
 \value{
 tibble
