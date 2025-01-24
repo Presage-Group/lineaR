@@ -4,11 +4,11 @@
 #' 
 #' @return tibble
 #' @export
-get_linear_current_user <- function(api_url){
-  return(
-    make_linear_api_request(
-      '{ "query": "{ viewer { id name email } }" }',
-      api_url
-    )
+get_linear_current_user <- function(api_url = "https://api.linear.app/graphql"){
+  resp <- make_linear_api_request(
+    "{ viewer { id name email } }",
+    api_url
   )
+  
+  as_tibble(httr2::resp_body_json(resp)) |> unnest_wider(data)
 }

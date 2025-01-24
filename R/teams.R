@@ -11,5 +11,5 @@ get_linear_teams <- function(api_url = "https://api.linear.app/graphql"){
     ) |> 
     httr2::resp_body_json()
     
-  return(dplyr::as_tibble(resp$data$teams) |> unnest_wider(nodes))
+  return(dplyr::as_tibble(resp$data$teams) |> tidyr::unnest_wider(nodes))
 }

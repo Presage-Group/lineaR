@@ -12,7 +12,8 @@ Imports:
     dplyr,
     glue,
     httr2,
-    keyring
+    keyring,
+    tidyr
 Suggests:
     testthat
 Config/testthat/edition: 3

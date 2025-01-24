@@ -7,7 +7,7 @@
 #' @export
 get_linear_issues <- function(team_id, api_url = "https://api.linear.app/graphql"){
   graphql_query <- glue::glue('{
-  team(id: "{team_id}") {
+  team(id: "[team_id]") {
     id
     name
 
@@ -25,9 +25,16 @@ get_linear_issues <- function(team_id, api_url = "https://api.linear.app/graphql
       }
     }
   }
-  }')
+  }', .open = "[", .close = "]")
 
-  return(make_linear_api_request(graphql_query, api_url))
+  resp <- make_linear_api_request(graphql_query, api_url)
+
+  return(as_tibble(httr2::resp_body_json(resp)) |> 
+    unnest_wider(data) |> 
+    unnest_wider(issues) |> 
+    unnest_longer(nodes) |>
+    select(nodes) |>
+    unnest_wider(nodes))
 }
 
 #' Creates a new issue within a team specified using the team's id. 
@@ -47,16 +54,21 @@ create_linear_issue <- function(
   
   graphql_query <- glue::glue('mutation {
     issueCreate(input: {
-      title: "{title}",
-      description: "{description}",
-      teamId: "{team_id}"
+      title: "[title]",
+      description: "[description]",
+      teamId: "[team_id]"
     }) {
       issue {
         id
         url
       }
     }
-  }')
+  }', .open = "[", .close = "]")
 
-  return(make_linear_api_request(graphql_query, api_url = api_url))
+  resp <- make_linear_api_request(graphql_query, api_url = api_url)
+
+  return(httr2::resp_body_json(resp) |> 
+    as_tibble() |> 
+    unnest_wider(data) |> 
+    unnest_wider(issue))
 }
