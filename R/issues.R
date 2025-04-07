@@ -1,8 +1,8 @@
 #' Returns a tibble with the issues for a given team_id
 #'
-#' @param team_id The id for the team. Use get_linear_teams() to find the id of the team you want. 
-#' @param api_url Defaults to the current linear api url, but can be changed 
-#' 
+#' @param team_id The id for the team. Use get_linear_teams() to find the id of the team you want.
+#' @param api_url Defaults to the current linear api url, but can be changed
+#'
 #' @return tibble
 #' @export
 get_linear_issues <- function(team_id, api_url = "https://api.linear.app/graphql"){
@@ -29,29 +29,29 @@ get_linear_issues <- function(team_id, api_url = "https://api.linear.app/graphql
 
   resp <- make_linear_api_request(graphql_query, api_url)
 
-  return(as_tibble(httr2::resp_body_json(resp)) |> 
-    unnest_wider(data) |> 
-    unnest_wider(issues) |> 
-    unnest_longer(nodes) |>
-    select(nodes) |>
-    unnest_wider(nodes))
+  return(dplyr::as_tibble(httr2::resp_body_json(resp)) |>
+    tidyr::unnest_wider(data) |>
+    tidyr::unnest_wider(issues) |>
+    tidyr::unnest_longer(nodes) |>
+    dplyr::select(nodes) |>
+    tidyr::unnest_wider(nodes))
 }
 
-#' Creates a new issue within a team specified using the team's id. 
+#' Creates a new issue within a team specified using the team's id.
 #'
 #' @param title The issue title
 #' @param description The issue description
-#' @param team_id The id for the team. Use get_linear_teams() to find the id of the team you want. 
-#' @param api_url Defaults to the current linear api url, but can be changed 
-#' 
+#' @param team_id The id for the team. Use get_linear_teams() to find the id of the team you want.
+#' @param api_url Defaults to the current linear api url, but can be changed
+#'
 #' @return tibble
 #' @export
 create_linear_issue <- function(
-  title="New issue via lineaR", 
-  description=" ", 
-  team_id, 
+  title="New issue via lineaR",
+  description=" ",
+  team_id,
   api_url = "https://api.linear.app/graphql"){
-  
+
   graphql_query <- glue::glue('mutation {
     issueCreate(input: {
       title: "[title]",
@@ -67,8 +67,8 @@ create_linear_issue <- function(
 
   resp <- make_linear_api_request(graphql_query, api_url = api_url)
 
-  return(httr2::resp_body_json(resp) |> 
-    as_tibble() |> 
-    unnest_wider(data) |> 
-    unnest_wider(issue))
+  return(httr2::resp_body_json(resp) |>
+    dplyr::as_tibble() |>
+    tidyr::unnest_wider(data) |>
+    tidyr::unnest_wider(issue))
 }
