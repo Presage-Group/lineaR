@@ -4,10 +4,16 @@
 \alias{get_linear_issues}
 \title{Returns a tibble with the issues for a given team_id}
 \usage{
-get_linear_issues(team_id, api_url = "https://api.linear.app/graphql")
+get_linear_issues(
+  team_id,
+  year = NULL,
+  api_url = "https://api.linear.app/graphql"
+)
 }
 \arguments{
 \item{team_id}{The id for the team. Use get_linear_teams() to find the id of the team you want.}
+
+\item{year}{If specified, all the issues (except the archived issues) since that year are returned. Default is \code{NULL} that returns all the issues to date, except the archived issues.}
 
 \item{api_url}{Defaults to the current linear api url, but can be changed}
 }

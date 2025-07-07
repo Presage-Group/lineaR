@@ -13,6 +13,7 @@ Imports:
     glue,
     httr2,
     keyring,
+    tibble,
     tidyr
 Suggests:
     testthat
