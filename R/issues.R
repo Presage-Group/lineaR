@@ -22,6 +22,12 @@ build_graphql_query <- function(team_id, cursor = NULL, year = NULL) {
             assignee { id name }
             createdAt
             updatedAt
+            completedAt
+            project {
+              id
+              name
+              status { id name }
+            }
             state { id name }
             priority
             priorityLabel

@@ -1,9 +1,10 @@
 Package: lineaR
 Title: R Interface for Linear
-Version: 0.1.0
-Authors@R: 
-    person("Randy", "Boyes", , "rboyes@presagegroup.com", role = c("aut", "cre"),
-           comment = c(ORCID = "0000-0003-3152-2920"))
+Version: 0.2.0
+Authors@R: c(
+    person("Randy", "Boyes", email = "rboyes@presagegroup.com", role = c("aut", "cre")),
+    person("Umair", "Durrani", email = "udurrani@presagegroup.com", role = "ctb")
+  )
 Description: This package provides a simple interface for interacting with issues and projects on linear.app from R. 
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
