@@ -1,6 +1,6 @@
 Package: lineaR
 Title: R Interface for Linear
-Version: 0.2.0
+Version: 0.2.1
 Authors@R: c(
     person("Randy", "Boyes", email = "rboyes@presagegroup.com", role = c("aut", "cre")),
     person("Umair", "Durrani", email = "udurrani@presagegroup.com", role = "ctb")
@@ -19,4 +19,4 @@ Imports:
 Suggests:
     testthat
 Config/testthat/edition: 3
-License: MIT + file LICENSE
+License: MIT

@@ -3,18 +3,20 @@
 #' @param team_id The id for the team. Use get_linear_teams() to find the id of the team you want.
 #' @param cursor The id of the `after` cursor, obtained with `page_info$endCursor`.
 #' @param year If specified, all the issues (except the archived issues) since that year are returned. Default is `NULL` that returns all the issues to date, except the archived issues.
-#'
+#' @param include_archived Defaults to `FALSE`. Change to `TRUE` to include archived issues. 
+#' 
 #' @returns character
-build_graphql_query <- function(team_id, cursor = NULL, year = NULL) {
+build_graphql_query <- function(team_id, cursor = NULL, year = NULL, include_archived = FALSE) {
   cursor_part <- if (!is.null(cursor)) glue::glue(', after: "{cursor}"') else ""
   year_filter <- if (!is.null(year)) glue::glue(', filter: { createdAt: { gte: "[year]" } }', .open = "[", .close = "]") else ""
+  archived <- if(include_archived) ', includeArchived:true' else ""
 
   glue::glue('
     {
       team(id: "[team_id]") {
         id
         name
-        issues(first: 50[cursor_part][year_filter]) {
+        issues(first: 50[archived][cursor_part][year_filter]) {
           nodes {
             id
             title
