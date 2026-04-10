@@ -55,7 +55,7 @@ build_graphql_query <- function(team_id, cursor = NULL, year = NULL, include_arc
 #'
 #' @return tibble
 #' @export
-get_linear_issues <- function(team_id, year = NULL, api_url = "https://api.linear.app/graphql"){
+get_linear_issues <- function(team_id, year = NULL, api_url = "https://api.linear.app/graphql", include_archived = FALSE){
   all_nodes <- list()
   cursor <- NULL
   has_next <- TRUE
