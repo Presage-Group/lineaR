@@ -51,6 +51,7 @@ build_graphql_query <- function(team_id, cursor = NULL, year = NULL, include_arc
 #' @param team_id The id for the team. Use get_linear_teams() to find the id of the team you want.
 #' @param year If specified, all the issues (except the archived issues) since that year are returned. Default is `NULL` that returns all the issues to date, except the archived issues.
 #' @param api_url Defaults to the current linear api url, but can be changed
+#' @param include_archived Defaults to `FALSE`. Change to `TRUE` to include archived issues. 
 #'
 #' @return tibble
 #' @export
@@ -60,7 +61,7 @@ get_linear_issues <- function(team_id, year = NULL, api_url = "https://api.linea
   has_next <- TRUE
 
   while (has_next) {
-    query <- build_graphql_query(team_id, cursor = cursor, year = year)
+    query <- build_graphql_query(team_id, cursor = cursor, year = year, include_archived = include_archived)
     resp <- make_linear_api_request(query, api_url)
     resp_data <- httr2::resp_body_json(resp)
 
